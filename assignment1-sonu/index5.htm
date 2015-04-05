@@ -1,0 +1,44 @@
+<html   ng-app="myApp">
+  <head>
+    <title></title>
+    <script src="angular.min.js"></script>
+	<script>
+	//var x;
+	//alert(x);
+	
+	function abc(){
+		for(i=0;i<5;i++){
+			var y = '33';
+			
+		}
+		alert(y);
+	}
+	abc();
+	
+	</script>
+	
+  </head>
+  <body >
+	<div >
+	<div ng-controller="MyCtrl">
+  <form name="form" novalidate>
+      <select ng-model="selectedProduct" ng-options="product.pname for product in products" name="product"></select>
+      <input type="text" ng-model="selectedProduct.pid" name="pid">
+  </form>
+  <p>Product: {{selectedProduct}}</p>
+</div>
+	</div>
+	<script>
+	var myApp = angular.module('myApp',[]);
+
+myApp.controller('MyCtrl',function($scope) {
+    $scope.products = [
+        { pname: 'test', pid: 1 },
+        { pname: 'foo', pid: 2 },
+        { pname: 'bar', pid: 3 }
+    ];
+}
+);
+	</script>
+	  </body>
+</html>

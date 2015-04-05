@@ -1,0 +1,101 @@
+<html   ng-app="app">
+  <head>
+    <title></title>
+    <script src="angular.min.js"></script>
+  </head>
+  <body  ng-controller="ExampleController">
+    
+	<h1>Angular.JS Assignment 1</h1>
+      <form name="form" novalidate>
+
+	<br/><br/>
+	<div >
+	<div style="float:left;width:800px;">	
+    <div style="float:left;width:200px;"> Item</div>
+	<div style="float:left;width:100px;"> Cost</div>
+	<div style="float:left;width:100px;"> Quantity</div>
+	<div style="float:left;width:100px;"> Price</div>
+	</div>
+	<div style="float:left;width:800px;" >	
+    <div style="float:left;width:200px;"> Soap</div>
+	<div style="float:left;width:100px;"> 
+		<input type="number"  min="0"     ng-blur="onBlur($event)" ng-model="soapcost">
+	</div>
+	<div style="float:left;width:100px;"> 
+		<input type="number"  min="0" ng-blur="onBlur($event)"  ng-model="soapqty">
+	</div>
+	<div style="float:left;width:100px;">
+      	<input type="text" value=""  ng-model="totsoapcost">
+    </div>
+	    <!--Hello {{soapprice}}!-->
+	</div>
+	
+	<div style="float:left;width:800px;">	
+    <div style="float:left;width:200px;"> Pen </div>
+	<div style="float:left;width:100px;"> <input ng-blur="onpenBlur($event)"  type="number" min="0" ng-model="pencost"></div>
+	<div style="float:left;width:100px;"> <input ng-blur="onpenBlur($event)" type="number" min="0" ng-model="penqty"></div>
+	<div style="float:left;width:100px;"> <input type="text" ng-model="totalpencost"></div>
+	</div>
+	<div style="float:left;width:800px;">	
+    <div style="float:left;width:200px;">&nbsp; </div>
+	<div style="float:left;width:100px;">&nbsp;</div>
+	<div style="float:left;width:100px;">  Total Price</div>
+	<div style="float:left;width:100px;"> {{totalprice()|currency}}</div>
+	</div>
+	<div style="float:left;width:800px;">	
+    <div style="float:left;width:200px;">&nbsp;</div>
+	<div style="float:left;width:100px;">&nbsp; </div>
+	<div style="float:left;width:100px;">  Tax Price</div>
+	<div style="float:left;width:100px;"> <input type="text" ng-model="taxprice"></div>
+	</div>
+	<div style="float:left;width:800px;">	
+    <div style="float:left;width:200px;">&nbsp; </div>
+	<div style="float:left;width:100px;">&nbsp; </div>
+	<div style="float:left;width:100px;"> Total with Tax Price</div>
+	<div style="float:left;width:100px;"> <input type="text" ng-model="totalpricetax"></div>
+	<br/><br/><button ng-click="onbtnclick()">Calculate</button>
+	</div>
+	</div>
+	</form>
+	<script>
+	var myapp =   angular.module('app', []);
+
+	myapp.controller("ExampleController", function($scope) {
+		
+		$scope.taxprice  = 10;
+		$scope.soapcost  = 0;
+		$scope.soapqty   = 0;
+		$scope.totsoapcost=0;
+		$scope.pencost   = 0;
+		$scope.penqty    = 0;
+		$scope.totalpencost = 0;
+		
+		
+		$scope.onBlur = function(evt) {
+						$scope.totsoapcost =  ($scope.soapcost*$scope.soapqty);	
+						
+		};
+	
+		$scope.onpenBlur = function(evt) {
+						$scope.totalpencost =  ($scope.pencost*$scope.penqty);	
+						
+						
+		};
+		
+		$scope.onbtnclick = function(evt) {
+						$scope.totalpricetax =  ($scope.totalpencost+$scope.totsoapcost + $scope.taxprice);	
+						
+						
+		};
+		$scope.totalprice = function(){ 
+					return($scope.totalpencost+$scope.totsoapcost);
+			};
+		$scope.soappricenew = function(){ 
+					return($scope.soapcost*$scope.soapqty);
+			};
+		
+	}
+	);
+	</script>
+	  </body>
+</html>

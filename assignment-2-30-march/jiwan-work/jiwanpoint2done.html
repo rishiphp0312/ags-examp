@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="appFilereader">
+
+  <head>
+    <script data-require="angular.js@1.2.0" data-semver="1.2.0" src="http://code.angularjs.org/1.2.0/angular.js"></script>
+    <script src="filereader.js"></script>
+  </head>
+
+  <body ng-contoller="appCTRL" ng-style="{'background-image':'url('+dummyimages+')'}">
+
+  <form novalidate>
+    Pick an image-file: <input ng-change="showback()" type="file"  ng-model="dummyimages" accept="image/*" back-img app-filereader />
+	<br />
+  <!--  <img  ng-src="{{dummyimages}}" width="30" /><br />-->
+  </form>
+  
+</body>
+
+</html>

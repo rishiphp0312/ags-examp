@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <title></title>
+    <script src="jquery-2.1.3.min.js"></script>
+  </head>
+  <body>
+    <h1>jQuery Example</h1>
+    <br/><br/>
+    User name:<input id="textInput" type="text"/>
+    <br/><br/>
+    Hello <span id="nameDiv"></span>!
+
+    <script>
+      $('#textInput').on('keyup', function(){
+        $('#nameDiv').html($('#textInput').val());
+      });
+    </script>
+  </body>
+</html>

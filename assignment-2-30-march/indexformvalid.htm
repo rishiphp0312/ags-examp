@@ -1,0 +1,201 @@
+<html   ng-app="app" ng-init="jsonobject = [
+			{'name':'Raj','age':'23','telno':'930303000','id':1  },
+			{'name':'Ram mehrotra','age':'223','telno':'111100' ,'id':2  },
+			{'name':'Mani mehrotra','age':'2003','telno':'200000' ,'id':3 }
+			]">
+  <head>
+    <title></title>
+    <script src="angular.min.js"></script>
+  </head>
+  <body  ng-controller="ExampleController">
+    
+	<h1>Angular.JS Assignment 1</h1>
+      <form name="form" novalidate>
+
+	<br/><br/>
+	<div >
+	<div style="float:left;width:800px;">	
+    <div style="float:left;width:200px;"> Item</div>
+	<div style="float:left;width:100px;"> Cost</div>
+	<div style="float:left;width:100px;"> Quantity</div>
+	<div style="float:left;width:100px;"> Price</div>
+	</div>
+	<div style="float:left;width:800px;" >	
+    <div style="float:left;width:200px;"> Soap</div>
+	<div style="float:left;width:100px;"> 
+		<input type="number"  min="0"     ng-blur="onBlur($event)" ng-model="soapcost">
+	</div>
+	<div style="float:left;width:100px;"> 
+		<input type="number"  min="0" ng-blur="onBlur($event)"  ng-model="soapqty">
+	</div>
+	<div style="float:left;width:100px;">
+      	<input type="text" value=""  ng-model="totsoapcost">
+    </div>
+	    <!--Hello {{soapprice}}!-->
+	</div>
+	
+	<div style="float:left;width:800px;">	
+    <div style="float:left;width:200px;"> Pen </div>
+	<div style="float:left;width:100px;"> <input ng-blur="onpenBlur($event)"  type="number" min="0" ng-model="pencost"></div>
+	<div style="float:left;width:100px;"> <input ng-blur="onpenBlur($event)" type="number" min="0" ng-model="penqty"></div>
+	<div style="float:left;width:100px;"> <input type="text" ng-model="totalpencost"></div>
+	</div>
+	<div style="float:left;width:800px;">	
+    <div style="float:left;width:200px;">&nbsp; </div>
+	<div style="float:left;width:100px;">&nbsp;</div>
+	<div style="float:left;width:100px;">  Total Price</div>
+	<div style="float:left;width:100px;"> {{totalprice()|currency}}</div>
+	</div>
+	<div style="float:left;width:800px;">	
+    <div style="float:left;width:200px;">&nbsp;</div>
+	<div style="float:left;width:100px;">&nbsp; </div>
+	<div style="float:left;width:100px;">  Tax Price</div>
+	<div style="float:left;width:100px;"> <input type="text" ng-model="taxprice"></div>
+	</div>
+	<div style="float:left;width:800px;">	
+    <div style="float:left;width:200px;">&nbsp; </div>
+	<div style="float:left;width:100px;">&nbsp; </div>
+	<div style="float:left;width:100px;"> Total with Tax Price</div>
+	<div style="float:left;width:100px;"> <input type="text" ng-model="totalpricetax"></div>
+	<br/><br/><button ng-click="onbtnclick()">Calculate</button>
+	</div>
+	
+	<div style="float:left;width:800px;">	
+    <div style="float:left;width:200px;">&nbsp; </div>
+	<div style="float:left;width:100px;">&nbsp; </div>
+	<div style="float:left;width:100px;"> Select User</div>
+	<div style="float:left;width:100px;">
+	<!--<select ng-model="selectuser" >
+		<option  value='0'>All</option>
+
+	<option ng-repeat="user in jsonobject" value='{{user.id}}' >{{user.name}}</option>
+	</select>-->
+	<select ng-model="selectedProduct" ng-options="product.name for product in jsonobject" name="product"></select>	
+	</div>
+
+	</div>
+	<div style="float:left;width:800px;">	
+    
+	<div ng-repeat="user in jsonobject" id="divid{{user.id}}" style="float:left;width:100px;">
+	Name : {{user.name}} <br>
+	
+	Tel no: {{user.telno}}
+	<br>
+	Age : {{user.age}}
+	&nbsp; 
+	       <button class="btn" ng-click="editUser(user.id)">
+      <span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit
+      </button>
+	  <a href="#" rel="delid{{user.id}}" >Delete</a>
+	
+	</div>
+	
+	</div>
+	<div style="float:left;width:800px;"	
+     ng-show="edituserlabel">
+	Edit user 
+	</div>
+	<div style="float:left;width:800px;"	
+     ng-show="createuserlabel">
+	Create user 
+	</div>
+	<div  style="float:left;width:800px;">	
+	<div>
+	 Name <input type="text" name="name" ng-model="name">
+     Age 	<input type="text" name="age" ng-model="age">
+	
+	</div>
+	
+	<div>
+	 <input type="button" name="save" ng-model="save" ng-disabled="incomplete" value="save" ng-click="savedata()">
+	
+	</div>
+	<div>
+	</div>
+    </div>
+	</form>
+	<script>
+	/*var jsonobject = [
+			{'name':'Raj','age':'23','telno':'930303000','id':1  },
+			{'name':'Ram mehrotra','age':'223','telno':'111100' ,'id':2  },
+			{'name':'Mani mehrotra','age':'2003','telno':'200000' ,'id':3 }
+			];
+		for (var i in jsonobject){
+		//console.log(i+'===name==='+jsonobject[i].name);
+		//console.log(i+'=====id ='+jsonobject[i].id);
+		}
+	*/
+	var myapp =   angular.module('app', []);
+
+	myapp.controller("ExampleController", function($scope) {
+		
+		$scope.taxprice  = 10;
+		$scope.soapcost  = 0;
+		$scope.soapqty   = 0;
+		$scope.totsoapcost=0;
+		$scope.pencost   = 0;
+		$scope.penqty    = 0;
+		$scope.totalpencost = 0;
+		$scope.edituserlabel =false;
+		$scope.error = false;
+        $scope.incomplete = false;
+		$scope.savedata= function(){
+		//savedate
+		//alert('hua');
+		};
+		
+		$scope.editUser = function(userid){
+		
+                if(userid=='new'){
+		        
+     				$scope.edituserlabel =false;		
+				
+				}else{
+			    	
+					$scope.edituserlabel =true;
+					$scope.name = $scope.jsonobject[userid-1].name;
+					$scope.age  = $scope.jsonobject[userid-1].age;
+					
+				}			
+			
+		};
+		$scope.$watch('name',function() {$scope.test();});
+	    $scope.$watch('age',function() {$scope.test();});
+	
+		$scope.test = function(){
+			          $scope.incomplete = false;
+
+			  if ($scope.edituserlabel &&  (!$scope.name.length || !$scope.age.length) ) {
+				   $scope.incomplete = true;
+			  }		
+  
+  };
+		
+		$scope.onBlur = function(evt) {
+						$scope.totsoapcost =  ($scope.soapcost*$scope.soapqty);	
+						
+		};
+	
+		$scope.onpenBlur = function(evt) {
+						$scope.totalpencost =  ($scope.pencost*$scope.penqty);	
+						
+						
+		};
+		
+		$scope.onbtnclick = function(evt) {
+						$scope.totalpricetax =  ($scope.totalpencost+$scope.totsoapcost + $scope.taxprice);	
+						
+						
+		};
+		$scope.totalprice = function(){ 
+					return($scope.totalpencost+$scope.totsoapcost);
+			};
+		$scope.soappricenew = function(){ 
+					return($scope.soapcost*$scope.soapqty);
+			};
+		
+	}
+	);
+	</script>
+	  </body>
+</html>

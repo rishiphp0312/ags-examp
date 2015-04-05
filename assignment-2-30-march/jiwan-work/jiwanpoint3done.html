@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular.min.js"></script>
+	  <script type="text/javascript" src="compile/unminified/ng-img-crop.js"></script>
+  <link rel="stylesheet" href="compile/unminified/ng-img-crop.css"/>
+ <script src="filereadercrop.js"></script>
+  </head>
+
+<body ng-app="app" ng-controller="Ctrl">
+    <div class="fileinputs">
+        <input type="file" ng-model="filemodel" class="file" id="fileInput" />
+        <div class="fakefile">
+            <p>Drop Image Here</p>
+        </div>
+    </div>
+    <button ng-click="doClick()">Computer</button>
+    <div class="cropArea">
+        <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+    </div>
+    <div>Cropped Image:</div>
+    <div>
+        <img ng-src="{{myCroppedImage}}" />
+    </div>
+</body>
+</html>
+
+<style>
+
+.cropArea {
+    background: #E4E4E4;
+    overflow: hidden;
+    width:500px;
+    height:350px;
+    top: 100px;
+}
+div.fileinputs {
+    position: relative;
+}
+div.fakefile {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+    border: 3px dashed black;
+    border-radius: 3px;
+    margin: 10px auto;
+    width: 100% !important;
+    text-align: center;
+    height: 50px;
+}
+input.file {
+    height: 50px;
+    width: 100% !important;
+    position: relative;
+    text-align: right;
+    -moz-opacity:0;
+    filter:alpha(opacity: 0);
+    opacity: 0;
+    z-index: 2;
+    margin: 10px auto;
+}
+
+button {
+    width: 100%;
+    margin: 5px auto;
+}
+</style>

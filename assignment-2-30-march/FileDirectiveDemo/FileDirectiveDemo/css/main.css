@@ -1,0 +1,18 @@
+.fu-drop-area {
+    border: 2px dashed gray;
+    border-color: gray;
+    color: gray;
+    height: 100px;
+    line-height: 100px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.fu-drop-area:hover, .fu-drop-area.dragover {
+    background: greenyellow;
+    border-color: black;
+    color: black;
+}
+

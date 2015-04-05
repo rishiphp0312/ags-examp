@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ngModelDemoApp">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="Navneet Singh Tomar">
+        <title>NGModel</title>
+        <link type="text/css" rel="stylesheet" href="common/css/bootstrap.min.css">
+    </head>
+    <body >
+        <div class="container" ng-controller="ngModelDemoCtrl">
+        	<div class="row" style="margin: 5px 0px;">
+        		<div class="col-xs-3"><strong>Item</strong></div>
+        		<div class="col-xs-3"><strong>Cost</strong></div>
+        		<div class="col-xs-3"><strong>Quantity</strong></div>
+        		<div class="col-xs-3"><strong>Price</strong></div>
+        	</div>
+        	<div class="row" ng-repeat="item in items" style="margin: 5px 0px;">
+        		<div class="col-xs-3">{{item.name}}</div>
+        		<div class="col-xs-3"><input type='text' ng-model="item.cost" /></div>
+        		<div class="col-xs-3"><input type='text' ng-model="item.qty" /></div>
+        		<div class="col-xs-3"><input type='text' ng-model="{{(item.cost * item.qty)}}"></div>
+        	</div>
+        	<div class="row">
+        		<div class="col-xs-6"></div>
+        		<div class="col-xs-3">Tax</div>
+        		<div class="col-xs-3"><input type='text' ng-model="taxprice"/></div>
+        		
+        	</div>
+        	<div class="row">
+        		<div class="col-xs-6"></div>
+        		<div class="col-xs-3">Total with Tax Price</div>
+        		<div class="col-xs-3">{{getTotalPrice() | currency}}</div>
+        	</div>
+        </div>
+        
+        
+                
+    </body>
+		<script type="text/javascript" src="common/js/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="common/js/angular.min.js"></script>
+    <script type="text/javascript" src="common/js/bootstrap.min.js"></script>
+    <script>
+    	angular.module('ngModelDemoApp',[]).controller('ngModelDemoCtrl',['$scope', function($scope){
+    		$scope.items = [{name : "Soap", cost : 0, qty : 0}, {name : "Pen", cost : 0, qty : 0}];
+    		$scope.taxprice = 0;
+    		$scope.getTotalPrice = function(){
+    			var total = 0;
+    			angular.forEach($scope.items, function(item){
+    				total+=parseInt(item.cost * item.qty);
+    			});
+    			total+=parseInt($scope.taxprice);
+    			return total;
+    		}
+    	}]);
+    </script>	   
+</html>
+

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<title></title>
+    <script src="angular.min.js"></script>
+    <style type="text/css">
+	    div.spicy div {
+		  padding: 10px;
+		  border: solid 2px blue;
+		}
+    </style>
+    <script>
+	    var myApp = angular.module('app', []);
+		myApp.controller('MainController', ['$scope', function($scope) {
+		  $scope.timeOfDay = 'morning';
+		  $scope.name = 'Nikki';
+		}]);
+		myApp.controller('ChildController', ['$scope', function($scope) {
+		  $scope.name = 'Mattie';
+		}]);
+		myApp.controller('GrandChildController', ['$scope', function($scope) {
+		  $scope.timeOfDay = 'evening';
+		  $scope.name = 'Gingerbread Baby';
+		}]);
+    </script>
+</head>
+<body>
+	<div class="spicy">
+	  <div ng-controller="MainController">
+	    <p>Good {{timeOfDay}}, {{name}}!</p>
+
+	    <div ng-controller="ChildController">
+	      <p>Good {{timeOfDay}}, {{name}}!</p>
+
+	      <div ng-controller="GrandChildController">
+	        <p>Good {{timeOfDay}}, {{name}}!</p>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</body>
+</html>

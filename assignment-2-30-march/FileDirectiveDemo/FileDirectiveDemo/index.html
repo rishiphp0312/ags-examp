@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+    <title>File Directive Demo</title>
+    <script src="./lib/jquery/jquery-1.10.2.min.js"></script>
+    <script src="./lib/angularjs/angular.min.js"></script>
+    <link rel="Stylesheet" type="text/css" href="./css/main.css" />
+</head>
+<body ng-controller="IndexController">
+    <div>
+        <span>Single selection & not reset selection: </span>
+        <input fu-file-browser type="file" ng-model="fileList1" />
+        <div ng-repeat="f in fileList1">- {{f.name}}</div>
+    </div>
+    <br/>
+    <div>
+        <span>Multiple selections & reset selection: </span>
+        <input fu-file-browser fu-multiple fu-resetable type="file" ng-model="fileList2" />
+        <div ng-repeat="f in fileList2">- {{f.name}}</div>
+    </div>
+    <br/>
+    <div>
+        <div fu-file-dropper ng-model="fileList3">Drop files here</div>
+        <div ng-repeat="f in fileList3">- {{f.name}}</div>
+    </div>
+</body>
+<script src="./directives/filebrowser.js"></script>
+<script src="./directives/filedropper.js"></script>
+<script src="./controllers/indexctrl.js"></script>
+</html>

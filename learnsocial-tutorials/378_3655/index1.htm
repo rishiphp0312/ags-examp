@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <h1>JavaScript Example</h1>
+    User name:<input id="textInput" type="text"/>
+    <br/>
+    <br/>
+    Hello <span id="nameDiv"></span>!
+
+    <script>
+      var textInputElement = document.getElementById('textInput'),
+          nameDivElement = document.getElementById('nameDiv');
+
+      textInputElement.addEventListener('keyup', function(){
+        var text = textInputElement.value;
+        nameDivElement.innerHTML = text;
+      });
+    </script>
+  </body>
+</html>

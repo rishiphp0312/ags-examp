@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html data-ng-app="app">
+<head>
+	<title></title>
+    <script src="angular.js"></script>
+    <script>
+    angular.module('app', [])
+	.controller('InvoiceCtrl', function ($scope){
+        $scope.qty = 1;
+        $scope.cost = 2;
+        $scope.answer = function(surcharge){ 
+        	return ($scope.qty * $scope.cost) + surcharge;
+        };
+        $scope.arr = [1,2,3];
+      });
+    </script>
+</head>
+<body ng-controller="InvoiceCtrl">
+	<!--<div ng-init="qty=1;cost=2">-->
+	<div>
+	  <b>Invoice:</b>
+	  <div>
+	    Quantity: <input type="number" min="0" ng-model="qty">
+	  </div>
+	  <div>
+	    Costs: <input type="number" min="0" ng-model="cost">
+	  </div>
+	  <div>
+	  	<i>
+	  	Surcharge = {{ 0.1 + 0.4 }}
+	  	<br/>
+	  	Array = {{(1+2)<1?true:false}}
+	  	</i><br/>
+	    <b>Total:</b> {{answer(0.5) | currency}}
+	  </div>
+	</div>
+</body>
+</html>

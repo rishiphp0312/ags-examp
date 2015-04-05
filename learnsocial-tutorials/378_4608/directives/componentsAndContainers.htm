@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="../angular.min.js"></script>
+    <script src="componentsAndContainers.js"></script>
+</head>
+<body>
+<div ng-app="myApp">
+  <div>
+  	<my-component text="sample text"></my-component>
+  	<br/>
+  	<br/>
+  	<br/>
+    <my-container text="This is a container">
+  		<my-component text="sample text"></my-component>
+  		<my-component text="sample text"></my-component>
+  		<my-component text="sample text"></my-component>
+  		<my-component text="sample text"></my-component>
+    </my-container>
+  </div>
+</div>
+</body>
+</html>
